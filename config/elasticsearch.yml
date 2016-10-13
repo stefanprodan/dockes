@@ -1,0 +1,30 @@
+index:
+   analysis:
+        analyzer:
+            ngram_single_folded:
+                type: custom
+                tokenizer: ngram_single
+                filter: [asciifolding, lowercase]
+            ngram_whitespace_folded:
+                type: custom
+                tokenizer: ngram_whitespace
+                filter: [asciifolding, lowercase]
+            keyword_simple:
+                type: custom
+                tokenizer: keyword
+                filter: [lowercase]
+            keyword_folded:
+                type: custom
+                tokenizer: keyword
+                filter: [asciifolding, lowercase]
+        tokenizer:
+            ngram_single:
+                type: nGram
+                min_gram: 2
+                max_gram: 50
+                token_chars: []
+            ngram_whitespace:
+                type: nGram
+                min_gram: 2
+                max_gram: 50
+                token_chars: [letter, digit, punctuation, symbol]
