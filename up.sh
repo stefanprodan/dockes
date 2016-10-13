@@ -1,11 +1,11 @@
 #!/bin/bash
 set -e
 
-image ="es-t"
-network ="es-net"
-storage = "/storage"
-cluster ="cluster-t"
-cluster_size =3
+image="es-t"
+network="es-net"
+storage="/storage"
+cluster="cluster-t"
+cluster_size=3
 
 # build image
 if [ ! "$(docker images -q  $image_name)" ];then

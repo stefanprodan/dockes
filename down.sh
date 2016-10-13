@@ -1,7 +1,7 @@
 #!/bin/bash
 
-image ="es-t"
-cluster_size =3
+image="es-t"
+cluster_size=3
 
 # stop and remove containers
 for ((i=1; i<=$cluster_size; i++)); do
