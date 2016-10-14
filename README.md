@@ -21,3 +21,15 @@ Starting node 2
 waiting 30s for the cluster to start
 cluster health status is green
 ```
+
+# Teardown
+
+```bash
+$ bash down.up
+Enter cluster size: 3
+es-t0
+es-t1
+es-t2
+Untagged: es-t:latest
+Deleted: sha256:dd2dea45d90c1090e53d995aa3df5300e5443ea01b02e4c3ef1228355212c710
+```
