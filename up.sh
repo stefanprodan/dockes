@@ -2,10 +2,12 @@
 set -e
 
 read -p "Enter cluster size: " cluster_size
+read -p "Enter storage path: " storage
+read -p "Enter node memory (g): " memory
 
+heap=$((memory/2))
 image="es-t"
 network="es-net"
-storage="/storage"
 cluster="cluster-t"
 
 # build image
@@ -39,7 +41,7 @@ for ((i=0; i<$cluster_size; i++)); do
         --network "$network" \
         -v "$storage":/usr/share/elasticsearch/data \
         -v "$PWD/config/elasticsearch.yml":/usr/share/elasticsearch/config/elasticsearch.yml \
-        --memory="2g" -e ES_HEAP_SIZE=1g \
+        --memory="${memory}g" -e ES_HEAP_SIZE="${heap}g" \
         -e ES_JAVA_OPTS="-Dmapper.allow_dots_in_name=true" \
         --restart unless-stopped \
         $image \
@@ -49,7 +51,6 @@ for ((i=0; i<$cluster_size; i++)); do
         -Des.network.publish_host=$publish_host \
         -Des.discovery.zen.ping.multicast.enabled=false \
         -Des.discovery.zen.ping.unicast.hosts="$hosts" \
-#        -Des.http.publish_port=920$i \ 
         -Des.transport.tcp.port=930$i \
         -Des.cluster.routing.allocation.awareness.attributes=disk_type \
         -Des.node.rack=dc1-r1 \
