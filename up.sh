@@ -34,7 +34,7 @@ for ((i=0; i<$cluster_size; i++)); do
     publish_port=920$i
     transport_port=930$i
 
-    docker run -d -p 920$i:920$i -p 930$i:930$i \
+    docker run -d -p 920$i:9200 -p 930$i:930$i \
         --name "$image$i" \
         --network "$network" \
         -v "$storage":/usr/share/elasticsearch/data \
@@ -49,7 +49,8 @@ for ((i=0; i<$cluster_size; i++)); do
         -Des.network.publish_host=$publish_host \
         -Des.discovery.zen.ping.multicast.enabled=false \
         -Des.discovery.zen.ping.unicast.hosts="$hosts" \
-        -Des.http.publish_port=920$i -Des.transport.tcp.port=930$i \
+#        -Des.http.publish_port=920$i \ 
+        -Des.transport.tcp.port=930$i \
         -Des.cluster.routing.allocation.awareness.attributes=disk_type \
         -Des.node.rack=dc1-r1 \
         -Des.node.disk_type=spinning \
