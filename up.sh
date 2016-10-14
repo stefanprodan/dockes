@@ -8,8 +8,8 @@ cluster="cluster-t"
 cluster_size=3
 
 # build image
-if [ ! "$(docker images -q  $image_name)" ];then
-    docker build -t $image_name .
+if [ ! "$(docker images -q  $image)" ];then
+    docker build -t $image .
 fi
 
 # create network
