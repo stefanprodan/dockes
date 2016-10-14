@@ -22,12 +22,12 @@ publish_host="$(ifconfig eth0 | sed -En 's/.*inet (addr:)?(([0-9]*\.){3}[0-9]*).
 
 hosts=""
 
-for ((i=0; i<=$cluster_size; i++)); do
+for ((i=0; i<$cluster_size; i++)); do
     hosts+="$image$i:930$i"
 	[ $i != $cluster_size ] && hosts+=","
 done
 
-for ((i=0; i<=$cluster_size; i++)); do
+for ((i=0; i<$cluster_size; i++)); do
     echo "Starting node $i"
 
     publish_port=920$i
