@@ -22,6 +22,13 @@ waiting 30s for the cluster to start
 cluster health status is green
 ```
 
+Monitor the cluster with HQ or KOPF:
+
+```
+http://<HOST-IP>:9200/_plugin/hq/#cluster
+http://<HOST-IP>:9200/_plugin/kopf/#!/cluster
+```
+
 # Teardown
 
 ```bash
