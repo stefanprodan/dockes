@@ -13,7 +13,7 @@ if [ ! "$(docker images -q  $image)" ];then
 fi
 
 # create network
-if [ ! "$(docker network ls --filter name='$network' -q)" ];then
+if [ ! "$(docker network ls --filter name=$network -q)" ];then
     docker network create $network
 fi
 
@@ -22,12 +22,12 @@ publish_host="$(ifconfig eth0 | sed -En 's/.*inet (addr:)?(([0-9]*\.){3}[0-9]*).
 
 hosts=""
 
-for ((i=1; i<=$cluster_size; i++)); do
+for ((i=0; i<=$cluster_size; i++)); do
     hosts+="$image$i:930$i"
 	[ $i != $cluster_size ] && hosts+=","
 done
 
-for ((i=1; i<=$cluster_size; i++)); do
+for ((i=0; i<=$cluster_size; i++)); do
     echo "Starting node $i"
 
     publish_port=920$i
