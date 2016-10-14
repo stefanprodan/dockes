@@ -3,7 +3,7 @@ set -e
 
 read -p "Enter cluster size: " cluster_size
 read -p "Enter storage path: " storage
-read -p "Enter node memory (g): " memory
+read -p "Enter node memory (mb): " memory
 
 heap=$((memory/2))
 image="es-t"
@@ -41,7 +41,7 @@ for ((i=0; i<$cluster_size; i++)); do
         --network "$network" \
         -v "$storage":/usr/share/elasticsearch/data \
         -v "$PWD/config/elasticsearch.yml":/usr/share/elasticsearch/config/elasticsearch.yml \
-        --memory="${memory}g" -e ES_HEAP_SIZE="${heap}g" \
+        --memory="${memory}m" -e ES_HEAP_SIZE="${heap}m" \
         -e ES_JAVA_OPTS="-Dmapper.allow_dots_in_name=true" \
         --restart unless-stopped \
         $image \
