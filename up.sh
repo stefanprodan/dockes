@@ -62,8 +62,8 @@ for ((i=0; i<$cluster_size; i++)); do
         -Des.threadpool.bulk.queue_size=500 
 done
 
-echo "waiting 15s for cluster to start"
+echo "waiting 15s for cluster to form"
 sleep 15
 
-$status="$(curl -fsSL "http://${publish_host}:9200/_cat/health?h=status")"
+status="$(curl -fsSL "http://${publish_host}:9200/_cat/health?h=status")"
 echo "cluster health status is $status"
