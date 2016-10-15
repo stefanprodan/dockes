@@ -27,7 +27,7 @@ publish_host="$(ifconfig eth0 | sed -En 's/.*inet (addr:)?(([0-9]*\.){3}[0-9]*).
 hosts=""
 for ((i=0; i<$cluster_size; i++)); do
     hosts+="$image$i:930$i"
-	[ $i != $cluster_size ] && hosts+=","
+	[ $i != $(($cluster_size-1)) ] && hosts+=","
 done
 
 # starting nodes
@@ -42,7 +42,7 @@ for ((i=0; i<$cluster_size; i++)); do
         --network "$network" \
         -v "$storage":/usr/share/elasticsearch/data \
         -v "$PWD/config/elasticsearch.yml":/usr/share/elasticsearch/config/elasticsearch.yml \
-		--cap-add=IPC_LOCK --ulimit memlock=-1:-1 \
+        --cap-add=IPC_LOCK --ulimit memlock=-1:-1 \
         --memory="${memory}m" -e ES_HEAP_SIZE="${heap}m" \
         -e ES_JAVA_OPTS="-Dmapper.allow_dots_in_name=true" \
         --restart unless-stopped \
@@ -65,5 +65,4 @@ done
 echo "waiting 30s for cluster to start"
 sleep 30
 
-echo "cluster health status"
-curl -fsSL "http://${publish_host}:9200/_cat/health?h=status"
+echo "cluster health status is $(curl -fsSL "http://${publish_host}:9200/_cat/health?h=status)"
