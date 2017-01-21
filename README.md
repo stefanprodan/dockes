@@ -4,10 +4,10 @@ Provisioning and running a multi-node Elasticsearch cluster on a single Docker h
 
 # Install
 
-Clone this repository on your Docker host, cd into dockes directory and run sh.up:
+Clone this repository on your Docker host, cd into dockes directory and run up.sh:
 
 ```bash
-$ bash sh.up
+$ bash up.sh
 Enter cluster size: 3
 Enter storage path: /storage
 Enter node memory (mb): 1024
@@ -32,7 +32,7 @@ http://<HOST-IP>:9200/_plugin/kopf/#!/cluster
 # Teardown
 
 ```bash
-$ bash down.up
+$ bash down.sh
 Enter cluster size: 3
 es-t0
 es-t1
